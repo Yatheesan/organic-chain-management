@@ -49,6 +49,8 @@ public class OrderManagementService {
             orderModel1.setDeliveryDate(orderModel.getDeliveryDate());
             orderModel1.setAddress(orderModel.getAddress());
             orderModel1.setFarmerId(orderModel.getFarmerId());
+            orderModel.setInspected(false);
+            orderModel.setInspectedBy("N/A");
             orderModel1.setAccepted(false);
             this.orderRepository.save(orderModel1);
             return true;
@@ -72,7 +74,14 @@ public class OrderManagementService {
             orderModel.setLedgerId(ledgerId);
             orderModel.setFarmerId(farmerId);
             orderModel.setAccepted(true);
+            this.orderRepository.save(orderModel);
         }
+    }
 
+    public void updateOrder(OrderModel orderModel) {
+        List<OrderModel> orderModels = this.orderRepository.findAllById(orderModel.getId());
+        if (!orderModels.isEmpty()) {
+            this.orderRepository.save(orderModel);
+        }
     }
 }

@@ -78,4 +78,14 @@ public class OrderManagementController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/api/order/update")
+    public ResponseEntity<String > updateOrder(@RequestBody OrderModel orderModel) {
+        try {
+            this.orderManagementService.updateOrder(orderModel);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

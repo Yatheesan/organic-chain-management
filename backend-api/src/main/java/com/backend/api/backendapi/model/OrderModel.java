@@ -20,4 +20,8 @@ public class OrderModel {
     private String address;
     private boolean isAccepted;
     private String farmerId;
+    private String status;
+    private String inspectedBy;
+    private boolean isInspected;
+    private String inspectedDate;
 }
