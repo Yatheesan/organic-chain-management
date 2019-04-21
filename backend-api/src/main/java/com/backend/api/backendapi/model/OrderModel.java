@@ -18,4 +18,6 @@ public class OrderModel {
     private String amount;
     private String deliveryDate;
     private String address;
+    private boolean isAccepted;
+    private String farmerId;
 }

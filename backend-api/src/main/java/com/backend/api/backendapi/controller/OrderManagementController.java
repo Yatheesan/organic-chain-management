@@ -1,6 +1,7 @@
 package com.backend.api.backendapi.controller;
 
 import com.backend.api.backendapi.model.OrderModel;
+import com.backend.api.backendapi.model.ResponseModel;
 import com.backend.api.backendapi.services.OrderManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.Repository;
@@ -22,10 +23,21 @@ public class OrderManagementController {
 
     @PostMapping()
     @RequestMapping("/api/order/add")
-    public ResponseEntity<String> addOrder(@RequestBody OrderModel orderModel) {
+    public ResponseEntity<ResponseModel> addOrder(@RequestBody OrderModel orderModel) {
+        ResponseModel responseModel = new ResponseModel();
         try {
-            this.orderManagementService.addOrder(orderModel);
-            return new ResponseEntity<>(HttpStatus.OK);
+            boolean isSuccess = this.orderManagementService.addOrder(orderModel);
+            if (isSuccess){
+                responseModel.setMessage("Success");
+                responseModel.setSuccess(true);
+                responseModel.setData(null);
+                return new ResponseEntity<>(responseModel, HttpStatus.OK);
+            } else {
+                responseModel.setMessage("fail");
+                responseModel.setSuccess(false);
+                responseModel.setData(null);
+                return new ResponseEntity<>(responseModel, HttpStatus.NOT_ACCEPTABLE);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -33,12 +45,19 @@ public class OrderManagementController {
 
     @GetMapping()
     @RequestMapping("/api/order/get/all")
-    public ResponseEntity<List<OrderModel>> getOrder() {
+    public ResponseEntity<ResponseModel> getOrder() {
+        ResponseModel responseModel = new ResponseModel();
         try {
             List<OrderModel> orderModels =  this.orderManagementService.getAllOrder();
-            return new ResponseEntity<>(orderModels, HttpStatus.OK);
+            responseModel.setMessage("Success");
+            responseModel.setSuccess(true);
+            responseModel.setData(orderModels);
+            return new ResponseEntity<>(responseModel, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            responseModel.setMessage("fail");
+            responseModel.setSuccess(false);
+            responseModel.setData(null);
+            return new ResponseEntity<>(responseModel, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -48,6 +67,17 @@ public class OrderManagementController {
         try {
             OrderModel orderModels =  this.orderManagementService.getOrder(id);
             return new ResponseEntity<>(orderModels, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping()
+    @RequestMapping("/api/order/accept")
+    public ResponseEntity<String > acceptOrder(@RequestParam("ledgerId") String ledgerId, @RequestParam("farmerId") String farmerId,@RequestParam("orderId") String orderId) {
+        try {
+            this.orderManagementService.acceptOrder(ledgerId, farmerId, orderId);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
