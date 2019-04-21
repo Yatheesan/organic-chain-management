@@ -31,4 +31,9 @@ public class UserManagementService {
             return true;
         }
     }
+
+    public List<UserModel> returnListBasedOnModel(String role) {
+        List<UserModel> userModels = userRepository.findAllByRole(role);
+        return userModels;
+    }
 }

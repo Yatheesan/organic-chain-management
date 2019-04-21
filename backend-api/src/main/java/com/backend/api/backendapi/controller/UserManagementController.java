@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class UserManagementController {
@@ -44,6 +45,17 @@ public class UserManagementController {
             } else {
                 return new ResponseEntity<>(userModel,HttpStatus.FORBIDDEN);
             }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping()
+    @RequestMapping("/api/user/role")
+    public ResponseEntity<List<UserModel>> getUserListBasedOnRole(@RequestParam("role") String role) {
+        List<UserModel> userModels = null;
+        try {
+            userModels = this.userManagementService.returnListBasedOnModel(role);
+            return new ResponseEntity<>(userModels,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

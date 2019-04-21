@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserRepository extends MongoRepository<UserModel,String> {
 
     List<UserModel> findTopByUserNameAndPassword(String userName, String password);
+
+    List<UserModel> findAllByRole(String role);
 }

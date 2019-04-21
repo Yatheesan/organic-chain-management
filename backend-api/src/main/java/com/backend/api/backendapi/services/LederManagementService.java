@@ -20,7 +20,7 @@ public class LederManagementService {
         this.userRepository = userRepository;
     }
 
-    public void addLedger(LedgerModel ledgerModel) {
+    public void  addLedger(LedgerModel ledgerModel) {
         List<UserModel> userModelList = this.userRepository.findAll();
         if (userModelList.isEmpty()) {
 
