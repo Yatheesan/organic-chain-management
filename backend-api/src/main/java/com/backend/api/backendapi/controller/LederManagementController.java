@@ -54,4 +54,14 @@ public class LederManagementController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/api/ledger/user/get")
+    public ResponseEntity<List<LedgerModel>> getLedgerByUserName(@RequestParam("userName") String userName) {
+        try {
+            List<LedgerModel> ledgerModels = this.lederManagementService.getLedgerByLedger(userName);
+            return new ResponseEntity<>(ledgerModels,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

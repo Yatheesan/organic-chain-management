@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface LedgerRepository extends MongoRepository<LedgerModel, ObjectId> {
     List<LedgerModel> findAllById(String id);
+    List<LedgerModel> findAllByOwner(String owner);
 }

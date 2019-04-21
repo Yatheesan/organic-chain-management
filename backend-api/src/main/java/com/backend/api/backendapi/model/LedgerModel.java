@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class LedgerModel extends Ledger {
     @Id
     private String id;
+    private String owner;
     @DBRef
     private FarmerModel farmerModel;
     @DBRef

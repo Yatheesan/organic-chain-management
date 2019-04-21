@@ -28,6 +28,7 @@ public class LederManagementService {
             for (UserModel userModel: userModelList) {
                 String userId = ledgerModel.getUserId();
                 ledgerModel.setId(userModel.getUserName() + "_" + userModel.getRole() + "_" + userId);
+                ledgerModel.setOwner(userModel.getUserName());
                 this.ledgerRepository.save(ledgerModel);
             }
         }
@@ -35,6 +36,11 @@ public class LederManagementService {
 
     public List<LedgerModel> getLedger(){
         List<LedgerModel> ledgerModels = this.ledgerRepository.findAll();
+        return ledgerModels;
+    }
+
+    public List<LedgerModel> getLedgerByLedger(String userName){
+        List<LedgerModel> ledgerModels = this.ledgerRepository.findAllByOwner(userName);
         return ledgerModels;
     }
 }

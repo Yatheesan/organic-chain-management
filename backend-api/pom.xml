@@ -10,8 +10,9 @@
 	</parent>
 	<groupId>com.backend.api</groupId>
 	<artifactId>backend-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>backend-api</name>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
