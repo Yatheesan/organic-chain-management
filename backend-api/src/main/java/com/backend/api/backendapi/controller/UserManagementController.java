@@ -20,8 +20,7 @@ public class UserManagementController {
         this.userManagementService = userManagementService;
     }
 
-    @PostMapping()
-    @RequestMapping("/api/user/register")
+    @PostMapping("/api/user/register")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserModel userModel){
         try {
             this.userManagementService.saveUserDetails(userModel);
@@ -31,8 +30,7 @@ public class UserManagementController {
         }
 
     }
-    @GetMapping()
-    @RequestMapping("/api/user/login")
+    @GetMapping("/api/user/login")
     public ResponseEntity<UserModel> getUserDetails(@RequestParam("password") String password,
                                                     @RequestParam("userName") String userName){
 
@@ -49,8 +47,7 @@ public class UserManagementController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping()
-    @RequestMapping("/api/user/role")
+    @GetMapping("/api/user/role")
     public ResponseEntity<List<UserModel>> getUserListBasedOnRole(@RequestParam("role") String role) {
         List<UserModel> userModels = null;
         try {

@@ -28,20 +28,18 @@ public class BackendApiApplication {
 
 	@Bean
 	public Docket api(){
+//		Docket docket = new Docket(DocumentationType.SWAGGER_2)
+//				.select()
+//				.apis(RequestHandlerSelectors.any())
+//				.paths(Predicates.not(PathSelectors.regex("/error.*")))
+//				.paths(Predicates.not(PathSelectors.regex("/actuator.*")))
+//				.build();
 		Docket docket = new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.any())
+				.apis(RequestHandlerSelectors.basePackage("com.backend.api.backendapi.controller"))
 				.paths(Predicates.not(PathSelectors.regex("/error.*")))
 				.paths(Predicates.not(PathSelectors.regex("/actuator.*")))
 				.build();
-		docket.globalOperationParameters(
-				Arrays.asList(new ParameterBuilder()
-						.name("X-API-KEY")
-						.description("API-KEY for Shopping Intent")
-						.modelRef(new ModelRef("string"))
-						.parameterType("header")
-						.required(true)
-						.build()));
 		return docket;
 	}
 }

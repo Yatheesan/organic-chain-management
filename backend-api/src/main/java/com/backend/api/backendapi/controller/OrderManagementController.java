@@ -21,8 +21,7 @@ public class OrderManagementController {
         this.orderManagementService = orderManagementService;
     }
 
-    @PostMapping()
-    @RequestMapping("/api/order/add")
+    @PostMapping("/api/order/add")
     public ResponseEntity<ResponseModel> addOrder(@RequestBody OrderModel orderModel) {
         ResponseModel responseModel = new ResponseModel();
         try {
@@ -43,8 +42,7 @@ public class OrderManagementController {
         }
     }
 
-    @GetMapping()
-    @RequestMapping("/api/order/get/all")
+    @GetMapping("/api/order/get/all")
     public ResponseEntity<ResponseModel> getOrder() {
         ResponseModel responseModel = new ResponseModel();
         try {
@@ -61,8 +59,7 @@ public class OrderManagementController {
         }
     }
 
-    @GetMapping()
-    @RequestMapping("/api/order/get")
+    @GetMapping("/api/order/get")
     public ResponseEntity<OrderModel> getOrderById(@RequestParam("id") String id) {
         try {
             OrderModel orderModels =  this.orderManagementService.getOrder(id);
@@ -72,8 +69,7 @@ public class OrderManagementController {
         }
     }
 
-    @PostMapping()
-    @RequestMapping("/api/order/accept")
+    @PostMapping("/api/order/accept")
     public ResponseEntity<String > acceptOrder(@RequestParam("ledgerId") String ledgerId, @RequestParam("farmerId") String farmerId,@RequestParam("orderId") String orderId) {
         try {
             this.orderManagementService.acceptOrder(ledgerId, farmerId, orderId);

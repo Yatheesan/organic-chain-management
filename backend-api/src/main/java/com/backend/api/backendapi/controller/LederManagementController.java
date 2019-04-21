@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,8 +22,7 @@ public class LederManagementController {
         this.lederManagementService = lederManagementService;
     }
 
-    @PostMapping()
-    @RequestMapping("/api/ledger/add")
+    @PostMapping("/api/ledger/add")
     public ResponseEntity<String> addLedger(@Valid @RequestBody Ledger
                                                         ledger) {
         try {
@@ -45,8 +45,7 @@ public class LederManagementController {
         }
     }
 
-    @GetMapping()
-    @RequestMapping("/api/ledger/get")
+    @GetMapping("/api/ledger/get")
     public ResponseEntity<List<LedgerModel>> getLedger() {
         try {
             List<LedgerModel> ledgerModels = this.lederManagementService.getLedger();
